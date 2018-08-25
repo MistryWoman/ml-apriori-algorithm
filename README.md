@@ -30,29 +30,29 @@ The next step is very important, apriori algorithm takes the input as list of li
 
 Then comes the important part, using the apriori algorithm, in-order to import the apriori algorithm you need to download the [apyori file](https://github.com/ymoch/apyori/blob/master/apyori.py) and put it in the same directory where you have your file. Now let's go to the most important part, which is understanding the apriori algorithm. As you can see in the above code, we have passed transactions along four parameters which are support, confident and lift. Let's see what each word means.
 
-**Support** : The frequency of an item being purchased in all the transaction. In simple terms how many times a product being purchased. Let's see how to choose a value for the support parameter. This dataset has 7500 transaction. So I thought to consider items that were in at least 30 transactions. So the support should be **30/7500 = 0.004**.
+### Support :
 
+The frequency of an item being purchased in all the transaction. In simple terms how many times a product being purchased. Let's see how to choose a value for the support parameter. This dataset has 7500 transaction. So I thought to consider items that were in at least 30 transactions. So the support should be **30/7500 = 0.004**.
 
-> Support (Product A) = No. of. Transaction A / No. of. Total Transaction
+> **Support (Product A) = No. of. Transaction A / No. of. Total Transaction**
 
+### Confident:
 
-**Confident** : The frequency of purchasing a product along with another product. In simple terms how many times we bought products together divided by number of time a product is purchased, let's say we have bought "Product A" 100 time, and among those 100 transaction we bought "Product B" 60 times, then the confident (buying "Product B" if a customer buy "Product A") is 0.6. Here we set 0.4 as the minimum confident.
+ The frequency of purchasing a product along with another product. In simple terms how many times we bought products together divided by number of time a product is purchased, let's say we have bought "Product A" 100 time, and among those 100 transaction we bought "Product B" 60 times, then the confident (buying "Product B" if a customer buy "Product A") is 0.6. Here we set 0.4 as the minimum confident.
 
-> Confidence (Product A -> Product B) = No. of. Transaction (A->B) / No. of. Transaction (A)
+> **Confidence (Product A -> Product B) = No. of. Transaction (A->B) / No. of. Transaction (A)**
 
-**Lift :** Lift is the boost we get from suggesting a product to a person who purchased some other product and to a normal person who didn't buy the other product. Let's take an example, let's say people have bought "Product B" 30 times, and People have bought "Product A" 500 times. Also 25 of the 30 "Product B" transactions have "Product A" as well. Therefore a normal person buying "Product B" percentage (Support B) is **30 / 7500 = 0.004** and a person buying "Product B" who bought "Product A" is **25 / 500 = 0.05**. So the boost we obtain is **0.05 / 0.004 = 12.5%**. This is called the Lift.
+### Lift :
 
-> Lift (Product A -> Product B) = Confidence (A -> B) / Support (B)
+Lift is the boost we get from suggesting a product to a person who purchased some other product and to a normal person who didn't buy the other product. Let's take an example, let's say people have bought "Product B" 30 times, and People have bought "Product A" 500 times. Also 25 of the 30 "Product B" transactions have "Product A" as well. Therefore a normal person buying "Product B" percentage (Support B) is **30 / 7500 = 0.004** and a person buying "Product B" who bought "Product A" is **25 / 500 = 0.05**. So the boost we obtain is **0.05 / 0.004 = 12.5%**. This is called the Lift.
 
-**Min_length** : This indicate what is the minimum number of items that should be in a transaction.
+> **Lift (Product A -> Product B) = Confidence (A -> B) / Support (B)**
+
+**Min_length:** This indicate what is the minimum number of items that should be in a transaction.
 
 That's all that we have to know about apriori, then the algorithm will go through the dataset and find associations which match our Support, Confident, Lift Value and produce a result set. Then we will convert it into a python list and visualize the different associations. Let's visualize one such resulting relationships.The below result is the first record in the result list that get printed.
 
-> RelationRecord(items=frozenset({'spaghetti', 'ground beef', 'cooking oil'}), 
-> support = 0.004799360085321957,
-> ordered_statistics=[OrderedStatistic(items_base=frozenset({'ground beef', 'cooking oil'}), 
-> items_add=frozenset({'spaghetti'}),
-> confidence=0.5714285714285714, lift=3.2819951870487856)])
+    RelationRecord(items=frozenset({'spaghetti', 'ground beef', 'cooking oil'}), support = 0.004799360085321957 ordered_statistics=[OrderedStatistic(items_base=frozenset({'ground beef', 'cooking oil'}),> items_add=frozenset({'spaghetti'}), confidence=0.5714285714285714, lift=3.2819951870487856)])
 
 As you can see above the chosen item collection is **{'spaghetti', 'ground beef', 'cooking oil'}** and the support for this is 0.0047. The association rule is if someone buys 'ground beef' and 'cooking oil' (look at item_base) then they would buy 'spaghetti' (look at items_add). The confident for the above association is 0.57 and lift is 3.2.
 
