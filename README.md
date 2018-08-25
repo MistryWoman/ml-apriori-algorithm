@@ -48,7 +48,8 @@ Lift is the boost we get from suggesting a product to a person who purchased som
 
 > **Lift (Product A -> Product B) = Confidence (A -> B) / Support (B)**
 
-**Min_length:** This indicate what is the minimum number of items that should be in a transaction.
+### Min_length: 
+This indicate what is the minimum number of items that should be in a transaction.
 
 That's all that we have to know about apriori, then the algorithm will go through the dataset and find associations which match our Support, Confident, Lift Value and produce a result set. Then we will convert it into a python list and visualize the different associations. Let's visualize one such resulting relationships.The below result is the first record in the result list that get printed.
 
